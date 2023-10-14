@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style> 
+  body{
+    width: 500px;
+    height: 250px;
+    border: 2px solid #DD3300;
+    border-radius: 10px;
+  }
+  .content{
+    margin-left: 12px;
+  }
+  .sticky-content{
+    border: 2px dotted green;
+    width: 200px;
+    margin-left: 12px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+</style>
+<body>
+       <div class="content">
+            <p>Nội dung không được troi theo thẻ div</p>
+       </div>
+        <div class="sticky-content">
+            <p>Thực hành CSS: Sử dụng Position</p>
+        </div>
+    <div style="height: 1500px;"></div>
+</body>
+</html>
