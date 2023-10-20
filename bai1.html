@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quản lý Phòng Ban</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h2>Quản lý Phòng Ban</h2>
+    <input type="text" id="tenPhong" placeholder="Nhập Tên Phòng">
+    <button id="themCapNhatBtn" onclick="themPhongBan()">Thêm</button>
+    <br><br>
+    <table id="bangPhongBan" class="display">
+      <thead>
+        <tr>
+          <th>Tên Phòng</th>
+          <th>Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dữ liệu phòng ban sẽ được thêm vào đây -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    var phongBanDangSua = null;
+
+    function themPhongBan() {
+      var tenPhong = document.getElementById("tenPhong").value;
+
+      if (phongBanDangSua) {
+        // Cập nhật tên phòng
+        phongBanDangSua.innerHTML = tenPhong;
+        phongBanDangSua = null;
+        document.getElementById("tenPhong").value = "";
+        document.getElementById("themCapNhatBtn").innerText = "Thêm";
+      } else {
+        var table = $('#bangPhongBan').DataTable();
+        table.row.add([tenPhong, '<button onclick="suaPhongBan(this)">Sửa</button> <button onclick="xoaPhongBan(this)">Xóa</button>']).draw();
+      }
+    }
+
+    function suaPhongBan(button) {
+      var row = button.parentNode.parentNode;
+      var tenPhong = row.cells[0].innerHTML;
+      document.getElementById("tenPhong").value = tenPhong;
+      phongBanDangSua = row.cells[0];
+      document.getElementById("themCapNhatBtn").innerText = "Cập nhật";
+    }
+
+    function xoaPhongBan(button) {
+      var table = $('#bangPhongBan').DataTable();
+      var row = button.parentNode.parentNode;
+      table.row(row).remove().draw();
+    }
+  </script>
+</body>
+</html>
